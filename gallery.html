@@ -3,25 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gallery - UMKM Pariwisata</title>
-    <link rel="stylesheet" href="css/style.css">
+    <title>Responsive Image Gallery</title>
+    <link rel="stylesheet" href="styles\gallery.css">
 </head>
-<body class="gallery-page">
-    <header>
-        <h1>Gallery</h1>
-    </header>
-    <main>
-        <section class="gallery">
-            <img src="path/to/image1.jpg" alt="Galeri 1">
-            <img src="path/to/image2.jpg" alt="Galeri 2">
-            <!-- Tambahkan lebih banyak gambar sesuai kebutuhan -->
-        </section>
-        <button onclick="history.back()">Kembali</button>
-        <button onclick="location.href='index.html'">Menu Utama</button>
-    </main>
-    <footer>
-        <p>&copy; 2024 UMKM Pariwisata</p>
-    </footer>
-    <script src="pariwisata.js"></script>
+<body>
+    <nav>
+        <ul>
+            <li><a href="index.html" aria-label="Paket Wisata">Beranda</a></li>
+            <li><a href="about.html" aria-label="Objek Wisata">About Us</a></li>
+            <li><a href="paket.html" aria-label="Pemesanan ">Paket Wisata</a></li>
+            <li><a href="gallery.html" aria-label="Gallery">Gallery</a></li>
+        </ul>
+    </nav>
+    <section class="gallery">
+        <h1>Image Gallery</h1>
+        <div class="gallery-container">
+            <div class="gallery-item"><img src="https://i.pinimg.com/736x/c2/26/e5/c226e55fe019b674c239b7a22f94538b.jpg" alt="Image 1"></div>
+            <div class="gallery-item"><img src="https://i.pinimg.com/564x/27/56/ce/2756ceff0266ebd206c73a5d02705503.jpg" alt="Image 2"></div>
+            <div class="gallery-item"><img src="https://i.pinimg.com/736x/c8/ac/89/c8ac89c11c41e971c1e32fa56d09819a.jpg" alt="Image 3"></div>
+            <div class="gallery-item"><img src="https://i.pinimg.com/564x/b7/7f/1c/b77f1cf031064c42a90e933f36a097ac.jpg" alt="Image 4"></div>
+            <div class="gallery-item"><img src="https://i.pinimg.com/736x/9a/8f/f3/9a8ff34bdded2e2cbe4bd6a73e29ce5b.jpg" alt="Image 5"></div>
+            <div class="gallery-item"><img src="https://i.pinimg.com/564x/75/9a/91/759a91b9bc9c1e3e210f7cd3051bae4c.jpg" alt="Image 6"></div>
+            <div class="gallery-item"><img src="https://i.pinimg.com/736x/66/ad/d9/66add93bf44e47d5b077490fa9455c14.jpg" alt="Image 6"></div>
+            <div class="gallery-item"><img src="https://i.pinimg.com/564x/72/85/f8/7285f8a099de36ccac8d5e0ab7eb5631.jpg" alt="Image 6"></div>
+            <div class="gallery-item"><img src="https://i.pinimg.com/564x/a2/d8/28/a2d828e954501ca3589b53befa3c08f9.jpg" alt="Image 6"></div>
+            <div class="gallery-item"><img src="https://i.pinimg.com/736x/ee/fc/e4/eefce4641509b81bdaa61546b7d8d3b2.jpg" alt="Image 6"></div>
+            <div class="gallery-item"><img src="https://i.pinimg.com/736x/16/bf/40/16bf407621df4dedc424003f0c32f8f2.jpg" alt="Image 6"></div>
+            <div class="gallery-item"><img src="https://i.pinimg.com/564x/3f/bf/59/3fbf59c1df27fda5afa5a8495913971b.jpg" alt="Image 6"></div>
+            <div class="gallery-item"><img src="https://i.pinimg.com/736x/ee/b4/bf/eeb4bf1323083b8d7a41b51f9790e2cc.jpg" alt="Image 6"></div>
+        </div>
+    </section>
 </body>
 </html>

@@ -3,41 +3,109 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pemesanan Paket Wisata - UMKM Pariwisata</title>
-    <link rel="stylesheet" href="css/style.css">
+
+    <!--=============== FAVICON ===============-->
+    <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
+
+    <!--=============== BOXICONS ===============-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+    <!--=============== CSS ===============-->
+    <link rel="stylesheet" href="styles\\pemesanan.css">
+    <title>Responsive watches website - Bedimcode</title>
 </head>
-<body class="pemesanan-page">
-    <header>
-        <h1>Pemesanan Paket Wisata</h1>
-    </header>
-    <main>
-        <section class="form-pemesanan">
-            <form action="submit-pemesanan.php" method="POST">
-                <label for="nama">Nama:</label>
-                <input type="text" id="nama" name="nama" required>
-                
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
-                
-                <label for="paket">Pilih Paket:</label>
-                <select id="paket" name="paket" required>
-                    <option value="paket1">Paket Wisata 1</option>
-                    <option value="paket2">Paket Wisata 2</option>
-                    <!-- Tambahkan opsi lebih banyak sesuai kebutuhan -->
-                </select>
-                
-                <label for="tanggal">Tanggal Keberangkatan:</label>
-                <input type="date" id="tanggal" name="tanggal" required>
-                
-                <input type="submit" value="Pesan Sekarang">
-            </form>
-        </section>
-        <button onclick="history.back()">Kembali</button>
-        <button onclick="location.href='index.html'">Menu Utama</button>
-    </main>
-    <footer>
-        <p>&copy; 2024 UMKM Pariwisata</p>
-    </footer>
-    <script src="pariwisata.js"></script>
+<body>
+    <section class="iya">
+        <nav>
+            <ul>
+                <li><a href="index.html" aria-label="Paket Wisata"> Beranda</a></li>
+                <li><a href="about.html" aria-label="Objek Wisata">About Us</a></li>
+                <li><a href="paket.html" aria-label="Pemesanan ">Paket Wisata</a></li>
+                <li><a href="gallery.html" aria-label="Gallery">Gallery</a></li>
+                <li><a href="admin.html" aria-label="Gallery">Login As Admin</a></li>
+            </ul>
+        </nav>
+    </section>
+    <section class="container">
+        <h1>Pemesanan</h1>
+        <div id="cart-items"></div>
+        <h2 id="total-price"></h2>
+        <form id="checkout-form">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+            <label for="id-card">ID Card:</label>
+            <input type="text" id="id-card" name="id-card" required>
+            <button type="submit">Checkout</button>
+        </form>
+    </section>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Load cart items from localStorage and display them
+            const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+            const cartItemsContainer = document.getElementById('cart-items');
+            const totalPriceElement = document.getElementById('total-price');
+            let totalPrice = 0;
+    
+            if (cartItems.length === 0) {
+                cartItemsContainer.innerHTML = '<p>Your cart is empty</p>';
+            } else {
+                cartItems.forEach((item, index) => {
+                    totalPrice += item.price;
+                    const itemElement = document.createElement('div');
+                    itemElement.innerHTML = `
+                        <h3>${item.title}</h3>
+                        <p>$${item.price}</p>
+                        <button onclick="removeFromCart(${index})">Remove</button>
+                    `;
+                    cartItemsContainer.appendChild(itemElement);
+                });
+                totalPriceElement.innerText = `Total Price: $${totalPrice}`;
+            }
+        });
+    
+        function removeFromCart(index) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart.splice(index, 1);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            window.location.reload();
+        }
+    
+        document.getElementById('checkout-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            const idCard = document.getElementById('id-card').value;
+            
+            // Create a new order object
+            const order = {
+                id: generateOrderId(), // You need to define generateOrderId() function
+                items: JSON.parse(localStorage.getItem('cart')) || [], // Get cart items
+                customer: {
+                    name: name,
+                    idCard: idCard
+                },
+                totalPrice: calculateTotalPrice()
+            };
+    
+            // Save order in localStorage
+            let orders = JSON.parse(localStorage.getItem('orders')) || [];
+            orders.push(order);
+            localStorage.setItem('orders', JSON.stringify(orders));
+    
+            // Inform user and clear cart
+            alert(`Checkout successful!\nName: ${name}\nID Card: ${idCard}\nTotal Price: $${order.totalPrice}`);
+            localStorage.removeItem('cart');
+            window.location.reload();
+        });
+    
+        // Function to generate a random order ID
+        function generateOrderId() {
+            return Math.floor(Math.random() * 1000000);
+        }
+
+        // Function to calculate total price
+        function calculateTotalPrice() {
+            const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+            return cartItems.reduce((total, item) => total + item.price, 0);
+        }
+    </script>
 </body>
 </html>

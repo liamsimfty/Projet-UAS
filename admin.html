@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/admin.css">
+    <title>Admin Login - Responsive watches website</title>
+</head>
+<body>
+    <section class="container">
+        <h1>Admin Login</h1>
+        <form id="admin-login-form">
+            <label for="admin-id">Admin ID:</label>
+            <input type="text" id="admin-id" name="admin-id" required>
+            <label for="admin-password">Password:</label>
+            <input type="password" id="admin-password" name="admin-password" required>
+            <button type="submit">Login</button>
+        </form>
+        <p id="login-error" style="color: red;"></p>
+    </section>
+    <script>
+        const maxAttempts = 3;
+
+        document.getElementById('admin-login-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const adminId = document.getElementById('admin-id').value;
+            const adminPassword = document.getElementById('admin-password').value;
+            
+            // Replace these credentials with your own
+            const correctId = 'admin';
+            const correctPassword = 'password';
+
+            let attempts = localStorage.getItem('loginAttempts') ? parseInt(localStorage.getItem('loginAttempts')) : 0;
+
+            if (attempts >= maxAttempts) {
+                document.getElementById('login-error').textContent = 'You have been blocked after 3 unsuccessful login attempts.';
+                return;
+            }
+
+            if (adminId === correctId && adminPassword === correctPassword) {
+                localStorage.setItem('adminLoggedIn', 'true');
+                localStorage.removeItem('loginAttempts'); // Reset attempts on successful login
+                window.location.href = 'admin-dashboard.html';
+            } else {
+                attempts++;
+                localStorage.setItem('loginAttempts', attempts);
+                document.getElementById('login-error').textContent = `Invalid ID or Password. Attempt ${attempts} of ${maxAttempts}.`;
+                
+                if (attempts >= maxAttempts) {
+                    document.getElementById('login-error').textContent = 'You have been blocked after 3 unsuccessful login attempts.';
+                }
+            }
+        });
+    </script>
+</body>
+</html>

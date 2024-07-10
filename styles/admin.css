@@ -1,0 +1,159 @@
+/*=============== GOOGLE FONTS ===============*/
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap");
+
+/*=============== VARIABLES CSS ===============*/
+:root {
+  --header-height: 3.5rem;
+  --first-color: hsl(31, 100%, 70%);
+  --button-color: hsl(0, 0%, 17%);
+  --button-color-alt: hsl(0, 0%, 21%);
+  --title-color: hsl(0, 0%, 15%);
+  --text-color: hsl(0, 0%, 35%);
+  --text-color-light: hsl(0, 0%, 55%);
+  --body-color: hsl(0, 0%, 99%);
+  --container-color: #fff;
+  --border-color: hsl(0, 0%, 94%);
+  --body-font: 'Roboto', sans-serif;
+  --biggest-font-size: 2rem;
+  --h1-font-size: 1.5rem;
+  --h2-font-size: 1.25rem;
+  --h3-font-size: 1rem;
+  --normal-font-size: .938rem;
+  --small-font-size: .813rem;
+  --smaller-font-size: .75rem;
+  --font-medium: 500;
+  --font-bold: 700;
+  --mb-0-5: .5rem;
+  --mb-0-75: .75rem;
+  --mb-1: 1rem;
+  --mb-1-5: 1.5rem;
+  --mb-2: 2rem;
+  --mb-2-5: 2.5rem;
+  --mb-3: 3rem;
+  --z-tooltip: 10;
+  --z-fixed: 100;
+}
+
+@media screen and (min-width: 968px) {
+  :root {
+    --biggest-font-size: 2.5rem;
+    --h1-font-size: 2.25rem;
+    --h2-font-size: 1.5rem;
+    --h3-font-size: 1.25rem;
+    --normal-font-size: 1rem;
+    --small-font-size: .875rem;
+    --smaller-font-size: .813rem;
+  }
+}
+
+/*=============== BASE ===============*/
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body,
+button,
+input {
+  font-family: var(--body-font);
+  font-size: var(--normal-font-size);
+}
+
+body {
+  margin: 215px;
+  background: #112c38;
+}
+
+.container {
+  padding-top: 50rem;
+  padding: 3%;
+  width: 30%;
+  height: 30%;
+  margin: 0 auto;
+  background: #0d2731;
+  border-radius: 15px;
+  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.2);
+}
+
+.container h1 {
+  color: #fff;
+  text-align: center;
+}
+
+form label {
+  display: block;
+  margin-bottom: var(--mb-0-5);
+  color: var(--text-color);
+}
+
+form input {
+  width: 100%;
+  padding: var(--mb-0-75);
+  margin-bottom: var(--mb-1);
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+}
+
+form button {
+  background: var(--first-color);
+  border: none;
+  padding: var(--mb-0-75) var(--mb-1-5);
+  border-radius: 5px;
+  cursor: pointer;
+  color: #fff;
+  width: 100%;
+  font-weight: var(--font-bold);
+}
+
+#orders-container div {
+  background: var(--container-color);
+  margin-bottom: var(--mb-1);
+  padding: var(--mb-0-75);
+  border-radius: 8px;
+}
+
+#orders-container h3,
+#orders-container ul,
+#orders-container p {
+  margin: 0;
+  color: var(--text-color);
+}
+
+#orders-container ul {
+  list-style: none;
+  padding: 0;
+}
+
+#orders-container li {
+  margin-bottom: var(--mb-0-5);
+}
+
+#orders-container button
+
+#product-container div {
+  background: var(--container-color);
+  margin-bottom: var(--mb-1);
+  padding: var(--mb-0-75);
+  border-radius: 8px;
+}
+
+#product-container h3,
+#product-container ul,
+#product-container p {
+  margin: 0;
+  color: var(--text-color);
+}
+
+#product-container ul {
+  list-style: none;
+  padding: 0;
+}
+
+#product-container li {
+  margin-bottom: var(--mb-0-5);
+}
