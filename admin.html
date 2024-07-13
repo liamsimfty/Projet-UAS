@@ -26,20 +26,14 @@
             const adminId = document.getElementById('admin-id').value;
             const adminPassword = document.getElementById('admin-password').value;
             
-            // Replace these credentials with your own
             const correctId = 'admin';
             const correctPassword = 'password';
 
             let attempts = localStorage.getItem('loginAttempts') ? parseInt(localStorage.getItem('loginAttempts')) : 0;
 
-            if (attempts >= maxAttempts) {
-                document.getElementById('login-error').textContent = 'You have been blocked after 3 unsuccessful login attempts.';
-                return;
-            }
-
             if (adminId === correctId && adminPassword === correctPassword) {
                 localStorage.setItem('adminLoggedIn', 'true');
-                localStorage.removeItem('loginAttempts'); // Reset attempts on successful login
+                localStorage.removeItem('loginAttempts'); 
                 window.location.href = 'admin-dashboard.html';
             } else {
                 attempts++;

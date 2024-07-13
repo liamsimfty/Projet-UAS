@@ -71,13 +71,17 @@ body {
 
 .container {
   padding-top: 50rem;
+  padding-bottom: 1rem;
   padding: 3%;
-  width: 30%;
+  width: 80%;
   height: 30%;
   margin: 0 auto;
   background: #0d2731;
   border-radius: 15px;
   box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.2);
+  color: #fff;
+  gap: 0.5rem;
+
 }
 
 .container h1 {
@@ -106,54 +110,59 @@ form button {
   border-radius: 5px;
   cursor: pointer;
   color: #fff;
-  width: 100%;
-  font-weight: var(--font-bold);
+  width: 30%;
+  margin: 0 auto;
+  display: block;
 }
 
-#orders-container div {
+#orders-container,
+#products-container,
+#gallery-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding-top: 1rem;
+}
+
+.card {
   background: var(--container-color);
-  margin-bottom: var(--mb-1);
-  padding: var(--mb-0-75);
+  padding: var(--mb-1);
   border-radius: 8px;
+  width: calc(25% - 1rem); 
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
+  height: fit-content;
 }
 
-#orders-container h3,
-#orders-container ul,
-#orders-container p {
-  margin: 0;
+.card h3,
+.card p,
+.card ul {
   color: var(--text-color);
+  margin: var(--mb-0-5) 0;
 }
 
-#orders-container ul {
+.card ul {
   list-style: none;
   padding: 0;
 }
 
-#orders-container li {
+.card li {
   margin-bottom: var(--mb-0-5);
 }
 
-#orders-container button
-
-#product-container div {
-  background: var(--container-color);
-  margin-bottom: var(--mb-1);
-  padding: var(--mb-0-75);
-  border-radius: 8px;
+.card img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
 }
 
-#product-container h3,
-#product-container ul,
-#product-container p {
-  margin: 0;
-  color: var(--text-color);
-}
-
-#product-container ul {
-  list-style: none;
-  padding: 0;
-}
-
-#product-container li {
-  margin-bottom: var(--mb-0-5);
+.card button {
+  background: var(--first-color);
+  border: none;
+  padding:2%;
+  border-radius: 5px;
+  cursor: pointer;
+  color: #fff;
+  width: 50%;
+  margin: 1px auto;
+  display: block;
 }

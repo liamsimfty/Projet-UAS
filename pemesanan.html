@@ -39,7 +39,6 @@
     </section>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Load cart items from localStorage and display them
             const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
             const cartItemsContainer = document.getElementById('cart-items');
             const totalPriceElement = document.getElementById('total-price');
@@ -76,8 +75,8 @@
             
             // Create a new order object
             const order = {
-                id: generateOrderId(), // You need to define generateOrderId() function
-                items: JSON.parse(localStorage.getItem('cart')) || [], // Get cart items
+                id: generateOrderId(), 
+                items: JSON.parse(localStorage.getItem('cart')) || [], 
                 customer: {
                     name: name,
                     idCard: idCard
@@ -85,23 +84,19 @@
                 totalPrice: calculateTotalPrice()
             };
     
-            // Save order in localStorage
             let orders = JSON.parse(localStorage.getItem('orders')) || [];
             orders.push(order);
             localStorage.setItem('orders', JSON.stringify(orders));
     
-            // Inform user and clear cart
             alert(`Checkout successful!\nName: ${name}\nID Card: ${idCard}\nTotal Price: $${order.totalPrice}`);
             localStorage.removeItem('cart');
             window.location.reload();
         });
     
-        // Function to generate a random order ID
         function generateOrderId() {
             return Math.floor(Math.random() * 1000000);
         }
 
-        // Function to calculate total price
         function calculateTotalPrice() {
             const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
             return cartItems.reduce((total, item) => total + item.price, 0);

@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles\\admin.css">
-    <title>Admin Dashboard - Responsive watches website</title>
+    <link rel="stylesheet" href="styles/admin.css">
+    <title>Admin Dashboard - Responsive Watches Website</title>
 </head>
 <body>
     <section class="container">
-        <h1>Admin Dashboard</h1>
-        <div id="orders-container"></div>
+        <h1>Admin Pemesanan</h1>
+        <div id="orders-container" class="grid-container"></div>
     </section>
     <section class="container">
         <h1>Admin Product</h1>
@@ -21,24 +21,37 @@
             <input type="number" id="product-price" name="product-price" required>
             <label for="product-image">Image URL:</label>
             <input type="text" id="product-image" name="product-image" required>
+            <label for="product-featured">Hot Sale:</label>
+            <input type="checkbox" id="product-featured" name="product-featured">
             <button type="submit">Save Product</button>
         </form>
-        <div id="products-container"></div>
+        <div id="products-container" class="grid-container"></div>
+    </section>
+    <section class="container">
+        <h1>Admin Gallery</h1>
+        <form id="gallery-form">
+            <input type="hidden" id="gallery-id">
+            <label for="gallery-image">Image URL:</label>
+            <input type="text" id="gallery-image" name="gallery-image" required>
+            <button type="submit">Save Image</button>
+        </form>
+        <div id="gallery-container" class="grid-container"></div>
     </section>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             if (localStorage.getItem('adminLoggedIn') !== 'true') {
                 window.location.href = 'admin.html';
             }
-    
+
             const orders = JSON.parse(localStorage.getItem('orders')) || [];
             const ordersContainer = document.getElementById('orders-container');
-    
+
             if (orders.length === 0) {
                 ordersContainer.innerHTML = '<p>No orders available</p>';
             } else {
                 orders.forEach(order => {
                     const orderElement = document.createElement('div');
+                    orderElement.classList.add('card');
                     orderElement.innerHTML = `
                         <h3>Order ID: ${order.id}</h3>
                         <p>Customer: ${order.customer.name} (${order.customer.idCard})</p>
@@ -51,13 +64,14 @@
                 });
             }
         });
-    
+
         function removeOrder(orderId) {
             let orders = JSON.parse(localStorage.getItem('orders')) || [];
             orders = orders.filter(order => order.id !== orderId);
             localStorage.setItem('orders', JSON.stringify(orders));
             window.location.reload();
         }
+
         document.addEventListener('DOMContentLoaded', () => {
             if (localStorage.getItem('adminLoggedIn') !== 'true') {
                 window.location.href = 'admin.html';
@@ -74,12 +88,14 @@
                 } else {
                     products.forEach((product, index) => {
                         const productElement = document.createElement('div');
+                        productElement.classList.add('card');
                         productElement.innerHTML = `
                             <h3>${product.title}</h3>
                             <p>$${product.price}</p>
-                            <img src="${product.image}" alt="${product.title}" style="width:100px;height:100px;">
+                            <p>Hot Sale: ${product.featured ? 'Yes' : 'No'}</p>
                             <button onclick="editProduct(${index})">Edit</button>
                             <button onclick="removeProduct(${index})">Remove</button>
+                            <button onclick="toggleFeatured(${index})">${product.featured ? 'Remove from Hot Sale' : 'Move to Hot Sale'}</button>
                         `;
                         productsContainer.appendChild(productElement);
                     });
@@ -91,12 +107,13 @@
                 const title = document.getElementById('product-title').value;
                 const price = document.getElementById('product-price').value;
                 const image = document.getElementById('product-image').value;
+                const featured = document.getElementById('product-featured').checked;
                 const id = document.getElementById('product-id').value;
 
                 if (id) {
-                    products[id] = { title, price, image };
+                    products[id] = { title, price, image, featured };
                 } else {
-                    products.push({ title, price, image });
+                    products.push({ title, price, image, featured });
                 }
 
                 localStorage.setItem('products', JSON.stringify(products));
@@ -110,6 +127,7 @@
                 document.getElementById('product-title').value = product.title;
                 document.getElementById('product-price').value = product.price;
                 document.getElementById('product-image').value = product.image;
+                document.getElementById('product-featured').checked = product.featured;
             };
 
             window.removeProduct = (index) => {
@@ -118,10 +136,72 @@
                 renderProducts();
             };
 
+            window.toggleFeatured = (index) => {
+                products[index].featured = !products[index].featured;
+                localStorage.setItem('products', JSON.stringify(products));
+                renderProducts();
+            };
+
             renderProducts();
         });
 
+        document.addEventListener('DOMContentLoaded', () => {
+            if (localStorage.getItem('adminLoggedIn') !== 'true') {
+                window.location.href = 'admin.html';
+            }
+
+            const gallery = JSON.parse(localStorage.getItem('gallery')) || [];
+            const galleryContainer = document.getElementById('gallery-container');
+            const galleryForm = document.getElementById('gallery-form');
+
+            function renderGallery() {
+                galleryContainer.innerHTML = '';
+                if (gallery.length === 0) {
+                    galleryContainer.innerHTML = '<p>No images available</p>';
+                } else {
+                    gallery.forEach((item, index) => {
+                        const galleryElement = document.createElement('div');
+                        galleryElement.classList.add('card');
+                        galleryElement.innerHTML = `
+                            <img src="${item.image}" alt="Gallery Image ${index + 1}" style="width:100px;height:100px;">
+                            <button onclick="editGallery(${index})">Edit</button>
+                            <button onclick="removeGallery(${index})">Remove</button>
+                        `;
+                        galleryContainer.appendChild(galleryElement);
+                    });
+                }
+            }
+
+            galleryForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const image = document.getElementById('gallery-image').value;
+                const id = document.getElementById('gallery-id').value;
+
+                if (id) {
+                    gallery[id] = { image };
+                } else {
+                    gallery.push({ image });
+                }
+
+                localStorage.setItem('gallery', JSON.stringify(gallery));
+                renderGallery();
+                galleryForm.reset();
+            });
+
+            window.editGallery = (index) => {
+                const item = gallery[index];
+                document.getElementById('gallery-id').value = index;
+                document.getElementById('gallery-image').value = item.image;
+            };
+
+            window.removeGallery = (index) => {
+                gallery.splice(index, 1);
+                localStorage.setItem('gallery', JSON.stringify(gallery));
+                renderGallery();
+            };
+
+            renderGallery();
+        });
     </script>
-    
 </body>
 </html>
