@@ -126,3 +126,19 @@ nav {
     transform-origin:left;
     transform:scaleX(1);
   }
+
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body,
+  button,
+  input {
+    font-family: var(--body-font);
+    font-size: var(--normal-font-size);
+  }
+  
+  body {
+    margin: 0;
+    background:#112c38;
+  }

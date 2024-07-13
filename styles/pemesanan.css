@@ -4,22 +4,6 @@
   margin: 0;
 }
 
-html {
-  scroll-behavior: smooth;
-}
-
-body,
-button,
-input {
-  font-family: var(--body-font);
-  font-size: var(--normal-font-size);
-}
-
-body {
-  margin: 0;
-  background:#112c38;
-}
-
 .container {
     padding: 3%;
     width: 50%;
