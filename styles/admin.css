@@ -1,3 +1,20 @@
+.container1 {
+  padding-top: 3%;
+  width: 80%;
+  height: 30%;
+  margin: 0 auto;
+  background: #0d2731;
+  border-radius: 15px;
+  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.2);
+  color: #fff;
+  gap: 0.5rem;
+}
+
+.container1 h1 {
+  color: #fff;
+  text-align: center;
+}
+
 .container {
   padding-top: 50rem;
   padding-bottom: 1rem;
@@ -10,7 +27,6 @@
   box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.2);
   color: #fff;
   gap: 0.5rem;
-
 }
 
 .container h1 {
